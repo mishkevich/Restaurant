@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Форма регистрации</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBuffaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<body>
+
+<div id="header">
+    <h1>Регистрация</h1>
+    <p class="form_registr">Зарегистрируйтесь ниже</p>
+</div>
+
+<form th:method="POST" th:action="@{/registration}" th:object="${user}" >
+
+    <p>Имя пользователя: <input type="text" th:field="*{username}" /></p>
+    <td style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{name}">Username error</td>
+    <p>E-mail: <input type="text" th:field="*{email}" /></p>
+    <td style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</td>
+    <p>Пароль: <input type="text" th:field="*{password}" /></p>
+    <td style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</td>
+    <p>Имя: <input type="text" th:field="*{firstName}" /></p>
+    <p>Фамилия: <input type="text" th:field="*{surname}" /></p>
+    <p>Номер телефона: + <input type="text" th:field="*{phoneNumber}" /></p>
+    <td style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">PhoneNumber error</td>
+    <p>Дата рождения: <input type="text" th:field="*{dateOfBirth}" /></p>
+    <td style="color:red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">DateOfBirth error</td>
+
+    <p><input type="submit" value="Создать" /> <input type="reset" value="Сбросить" /></p>
+</form>
+</body>
+</html>

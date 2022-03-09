@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8"/>
+    <title>Корзина</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+<table>
+    <tr>
+        <th><a href="main">Главная</a></th>
+        <th><a href="redirect: menu">Меню</a></th>
+        <th><a href="orders">Заказы</a></th>
+        <th><a href="menu/basket">Корзина (<span th:text="${session.basket_quantity}"></span></a>)</th>
+    </tr>
+</table>
+
+<div id="header">
+    <h1>Корзина</h1>
+    <p class="descript">Список выбранных блюд</p>
+</div>
+<p align="right"><span th:text="${session.username} ?: 'Guest'"></span>, ваш список блюд.</p>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Описание</th>
+        <th>Цена, руб.</th>
+        <th>Убрать</th>
+    </tr>
+
+    <tr th:each="meal : ${mealsInBasket}">
+        <td th:text="${meal.id}"></td>
+        <td th:text="${meal.name}"></td>
+        <td th:text="${meal.category}"></td>
+        <td th:text="${meal.description}"></td>
+        <td th:text="${meal.price}"></td>
+        <td>
+            <form th:action="@{/menu/deleteFromBasket}" method="get">
+                <input type="hidden" th:name="menuId" th:value="${meal.id}"/>
+                <input type="submit" value="Удалить"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<br>
+<br>
+<form th:action="@{/menu/formAnOrder}" method="get">
+    <input type="submit" value="Сформировать заказ"/>
+</form>
+</body>
+</html>

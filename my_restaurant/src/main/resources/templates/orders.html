@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8" />
+    <title>Ресторан</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+<table>
+    <tr>
+        <th><a href="main">Главная</a></th>
+        <th><a href="menu">Меню</a></th>
+        <th><a href="orders">Заказы</a></th>
+        <th><a href="menu/basket">Корзина (<span th:text="${session.basket_quantity}"></span></a>)</th>
+    </tr>
+</table>
+
+<div id="header">
+    <h1>Ресторан</h1>
+    <p class="descript">Что не делается - все к лучшему</p>
+</div>
+<p align="right">Hello, <span th:text="${session.username} ?: 'Guest'"></span>.</p>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Время оплаты</th>
+        <th>Время подтверждения</th>
+        <th>Сумма</th>
+        <th>Статус</th>
+    </tr>
+
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.orderTime}"></td>
+        <td th:text="${order.paymentTime}"></td>
+        <td th:text="${order.amount}"></td>
+        <td th:text="${order.status}"></td>
+        <span th:if="${order.status.name == 'CONFIRMED'}">
+            <td>
+                <form th:action="@{/paidOrder}" method="get">
+                    <input type="hidden" th:name="orderId" th:value="${order.id}"/>
+                    <input type="submit" value="Оплатить"/>
+                </form>
+            </td>
+        </span>
+    </tr>
+
+</table>
+</body>
+</html>

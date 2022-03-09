@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+        <meta charset="utf-8" />
+        <title>Ресторан</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+    </head>
+
+    <body>
+        <table>
+            <tr>
+                <th><a href="index">Главная</a></th>
+                <th><a href="menu">Меню</a></th>
+                <th><a href="basket">Корзина (<span th:text="${session.basket_quantity}"></span></a>)</th>
+            </tr>
+        </table>
+
+        <div id="header">
+            <h1>Ресторан</h1>
+            <p class="descript">Что не делается - все к лучшему</p>
+        </div>
+
+        <p align="right">Hello, <span th:text="${session.username} ?: 'Guest'"></span>.</p>
+
+        <h2 align="center"> Ваш заказ не был зарегистрирован. Повторите попытку или обратитесь к администратору.</h2>
+
+    </body>
+</html>

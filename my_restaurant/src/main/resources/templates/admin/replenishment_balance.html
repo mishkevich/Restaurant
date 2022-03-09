@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8" />
+    <title>Ресторан</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th><a href="work_panel">Главная рабочей панели</a></th>
+        <th><a href="view_orders">Просмотр всех заказов</a></th>
+        <th><a href="order_to_confirm">Подтверждение заказов</a></th>
+        <th><a href="replenishment_balance">Пополнение баланса пользователя</a></th>
+    </tr>
+</table>
+
+<div id="header">
+    <h1>Ресторан</h1>
+    <p class="descript">Что не делается - все к лучшему</p>
+</div>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Юзер</th>
+        <th>Роль</th>
+        <th>Баланс, руб.</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Номер телефона</th>
+        <th>E-mail</th>
+    </tr>
+
+    <tr th:each="user : ${usersDTO}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role}"></td>
+        <td th:text="${user.balance}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.phoneNumber}"></td>
+        <td th:text="${user.email}"></td>
+        <td><input type="text" th:name="Введите сумму пополнения" th:value="${amount}"/></td>
+                <td>
+                    <form th:action="@{/amount_deposit}" method="get">
+                        <input type="hidden" th:name="userId" th:value="${user.id}"/>
+                        <input type="hidden" th:name="amount" th:value="${amount}"/>
+                        <input type="submit" value="Подтвердить"/>
+                    </form>
+                </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

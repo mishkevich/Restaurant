@@ -1,0 +1,36 @@
+#header{
+  position:relative;
+  width: 100%;
+  height: 150px;
+  margin-bottom: 10px;
+  align="center"
+}
+h1{
+  position: relative
+  top:555px;
+  color: #000000;
+  font: 40px Georgia;
+  margin-left: 500px;
+}
+
+.descript{
+  position: relative
+  top:555px;
+  width: 400px;
+  color: #000000;
+  font-style: italic;
+  margin: 70px 0 0 30px;
+  font-size:22px;
+}
+img{
+  position:absolute;
+  top:10px;
+  left:10px;
+}
+
+#footer {
+  position:relative;
+  width: 100%;
+  height: 150px;
+  background-image: url("img/head_picture.jpg");
+}

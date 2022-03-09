@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8"/>
+    <title>Блюдо</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+<table>
+    <tr>
+        <th><a href="main">Главная</a></th>
+        <th><a href="menu">Меню</a></th>
+        <th><a href="orders">Заказы</a></th>
+        <th><a href="basket">Корзина (<span th:text="${session.basket_quantity}"></span></a>)</th>
+        <th><a href="redirect:about">О нас</a></th>
+        <th><a href="logout">Выйти</a></th>
+    </tr>
+</table>
+<div id="header">
+    <h1>Новое блюдо</h1>
+    <p class="descript">Добавлено новое блюдо</p>
+</div>
+<p align="right"><span th:text="${session.username} ?: 'Guest'"></span>, Вы добавили блюдо.</p>
+<table>
+            <form th:action="@{/menu}" method="get">
+                <input type="submit" value="Перейти"/>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+
+</html>

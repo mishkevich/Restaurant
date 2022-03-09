@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8" />
+    <title>Ресторан</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th><a href="work_panel">Главная рабочей панели</a></th>
+        <th><a href="view_orders">Просмотр всех заказов</a></th>
+        <th><a href="order_to_confirm">Подтверждение заказов</a></th>
+        <th><a href="replenishment_balance">Пополнение баланса пользователя</a></th>
+    </tr>
+</table>
+
+<div id="header">
+    <h1>Ресторан</h1>
+    <p class="descript">Что не делается - все к лучшему</p>
+</div>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Время создания</th>
+        <th>Время подтверждения</th>
+        <th>Статус</th>
+        <th>Сумма, руб.</th>
+    </tr>
+
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.orderTime}"></td>
+        <td th:text="${order.paymentTime}"></td>
+        <td th:text="${order.status}"></td>
+        <td th:text="${order.amount}"></td>
+                <td>
+                    <form th:action="@{/confirm_order}" method="get">
+                        <input type="hidden" th:name="orderId" th:value="${order.id}"/>
+                        <input type="submit" value="Подтвердить"/>
+                    </form>
+                </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

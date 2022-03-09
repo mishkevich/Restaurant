@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8"/>
+    <title>Меню</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu_style.css}"/>
+</head>
+<body>
+<table>
+    <tr>
+        <th><a href="main">Главная</a></th>
+        <th><a href="menu">Меню</a></th>
+        <th><a href="orders">Заказы</a></th>
+        <th><a href="menu/basket">Корзина (<span th:text="${session.basket_quantity}"></span></a>)</th>
+        <th><a href="about">О нас</a></th>
+        <th><a href="logout">Выйти</a></th>
+    </tr>
+</table>
+<div id="header">
+    <h1>Меню</h1>
+    <p class="descript">Меню блюд</p>
+</div>
+<p align="right"><span th:text="${session.username} ?: 'Guest'"></span>, выбирайте.</p>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Описание</th>
+        <th>Цена, руб.</th>
+        <th>Заказать</th>
+    </tr>
+
+    <tr th:each="meal : ${meal}">
+        <td th:text="${meal.id}"></td>
+        <td><a th:href="@{/menu/{id}(id=${meal.getId()})}" th:text="${meal.getName()}"></a></td>
+        <td th:text="${meal.category}"></td>
+        <td th:text="${meal.description}"></td>
+        <td th:text="${meal.price}"></td>
+        <td>
+            <form th:action="@{/menu/addToBasket}" method="get">
+                <input type="hidden" th:name="menuId" th:value="${meal.id}"/>
+                <input type="submit" value="Заказать"/>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
