@@ -1,6 +1,8 @@
 package by.mishkevich.my_restaurant.controller;
 
+import by.mishkevich.my_restaurant.entity.Meal;
 import by.mishkevich.my_restaurant.entity.User;
+import by.mishkevich.my_restaurant.service.impl.MealService;
 import by.mishkevich.my_restaurant.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +20,22 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MealService mealService;
+
 
     @GetMapping("users")
     public String getAllUsers(Model model, HttpSession session) {
         List<User> usersList = userService.findAll();
         model.addAttribute("user", usersList);
-        return "users";
+        return "/admin/users";
+    }
+
+    @GetMapping("meals")
+    public String getAllMeals(Model model, HttpSession session) {
+        List<Meal> mealsList = mealService.findAll();
+        model.addAttribute("meal", mealsList);
+        return "/admin/meals";
     }
 }
 
